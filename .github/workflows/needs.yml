@@ -14,12 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.2.2
  
       - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
+        uses: hashicorp/setup-terraform@v2.0.3
         with:
-          terraform_version: latest
+          terraform_version: 1.10.5
  
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -34,7 +34,7 @@ jobs:
     needs: setup  # Runs only after 'setup' completes
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.2.2
  
       - name: Terraform Init
         run: terraform init
@@ -43,7 +43,7 @@ jobs:
         run: terraform plan -out=tfplan
  
       - name: Save Plan Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.6.0
         with:
           name: terraform-plan
           path: tfplan
@@ -57,7 +57,7 @@ jobs:
         uses: actions/checkout@v3
  
       - name: Download Plan Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.2.2
         with:
           name: terraform-plan
           path: .
