@@ -4,7 +4,7 @@ provider "aws" {
  
 # S3 Bucket for Terraform State
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = "terraform-state-bucket-Vamsee"
+  bucket = "terraform-state-bucket-vamsee"
  
   lifecycle {
     prevent_destroy = true
@@ -38,7 +38,7 @@ resource "aws_dynamodb_table" "terraform_locks" {
 # Configure Remote Backend
 terraform {
   backend "s3" {
-    bucket         = "terraform-state-bucket-Vamsee"
+    bucket         = "terraform-state-bucket-vamsee"
     key            = "terraform.tfstate"
     region         = "ap-south-1"
     encrypt        = true
