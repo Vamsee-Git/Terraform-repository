@@ -1,24 +1,7 @@
 provider "aws" {
   region = "ap-south-1"
 }
- 
-# S3 Bucket for Terraform State
-resource "aws_s3_bucket" "terraform_state" {
-  bucket = "terraform-state-bucket-vamsee"
- 
-  lifecycle {
-    prevent_destroy = true
-  }
- 
-  versioning {
-    enabled = true
-  }
- 
-  tags = {
-    Name = "Terraform State Bucket"
-  }
-}
- 
+
 # Configure Remote Backend
 terraform {
   backend "s3" {
