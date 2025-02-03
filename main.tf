@@ -38,7 +38,7 @@ resource "aws_dynamodb_table" "terraform_locks" {
 # Configure Remote Backend
 terraform {
   backend "s3" {
-    bucket         = "terraform-state-bucket-vamsee"
+    bucket         = "terraform-state-bucket-Vamsee"
     key            = "terraform.tfstate"
     region         = "ap-south-1"
     encrypt        = true
