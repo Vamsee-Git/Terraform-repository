@@ -1,0 +1,28 @@
+name: terraform with vault
+on:
+  push
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Vault CLI
+        run: |
+          curl --silent --show-error --location https://releases.hashicorp.com/vault/1.11.0/vault_1.11.0_linux_amd64.zip -o vault.zip
+          unzip vault.zip
+          sudo mv vault /usr/local/bin/
+          vault -v
+
+      - name: Set up Vault token (GitHub Secrets)
+        run: echo "VAULT_TOKEN=${{ secrets.VAULT_TOKEN }}" >> $GITHUB_ENV
+
+      - name: Fetch AWS credentials from Vault
+        run: |
+          export VAULT_ADDR=http://15.206.164.168:8200  # Replace with your Vault address
+          aws_access_key=$(vault kv get -field=access_key secret/aws)
+          aws_secret_key=$(vault kv get -field=secret_key secret/aws)
+          echo "AWS_ACCESS_KEY_ID=${aws_access_key}" >> $GITHUB_ENV
+          echo "AWS_SECRET_ACCESS_KEY=${aws_secret_key}" >> $GITHUB_ENV
