@@ -23,7 +23,7 @@ resource "aws_instance" "web" {
 }
 # S3 bucket for Terraform remote state
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = "my-terraform-state-bucket-two-tier-Vamsee"  # Ensure this name is globally unique
+  bucket = "my-terraform-state-bucket-two-tier-vamsee"  # Ensure this name is globally unique
   acl    = "private"
   versioning {
     enabled = true
